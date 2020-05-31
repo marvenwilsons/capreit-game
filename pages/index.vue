@@ -1,9 +1,13 @@
 <template>
-	<div :is="view" ></div>
+    <v-fade-transition>
+		<div @startGame="startGame" @preGame="preGame" :is="view" ></div>
+    </v-fade-transition>
 </template>
 
 <script>
 import tlStart from '@/components/tl-start.vue'
+import tlPreGame from '@/components/tl-pre-game.vue'
+import tlGame from '@/components/tl-game.vue'
 
 export default {
 	data: () => ({
@@ -11,7 +15,17 @@ export default {
 		view: 'tl-start'
 	}),
 	components: {
-		'tl-start': tlStart
+		'tl-start': tlStart,
+		'tl-pre-game': tlPreGame,
+		'tl-game' : tlGame
+	},
+	methods: {
+		preGame() {
+			this.view = 'tl-pre-game'
+		},
+		startGame() {
+			this.view = 'tl-game'
+		}	
 	}
 }
 </script>

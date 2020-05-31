@@ -5,3 +5,9 @@ https://codepen.io/DanielWeiner/pen/iFadn
 
 button effects on click
 https://codepen.io/goingtogogo/pen/abvPKjN
+
+zapsplat lib
+https://www.zapsplat.com/sound-effect-categories/
+
+text-to-speech -> record in obs -> coverts into mp3 afterwards
+https://www.nuance.com/omni-channel-customer-engagement/voice-and-ivr/text-to-speech.html#!
