@@ -32,7 +32,7 @@
                 </div>
                 <br><br>
                 <v-flex flexcol >
-                    <div class="pad050" :style="{border: '2px solid red', background:'white', width: count + '%'}" ></div>
+                    <div class="pad050" :style="{background:'white', width: count + '%'}" ></div>
                     <v-flex class="cw padtop025" >Loading... {{count}}%</v-flex>
                 </v-flex>
             </div>

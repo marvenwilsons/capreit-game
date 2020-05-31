@@ -148,7 +148,6 @@ body {
 	line-height: 1.5em;
 	text-align: center;
 	display: inline-block;
-	width: 1.5em;
 	-webkit-border-radius: .75em;
 	-moz-border-radius: .75em;
 	-o-border-radius: .75em;
@@ -158,15 +157,14 @@ body {
 	-moz-box-shadow:  0 .2em maroon;
 	-o-box-shadow:  0 .2em maroon;
 	box-shadow:  0 .2em maroon;
-	color: red;
+	color: white;
 	margin: 5px;
-	background-color: red;
-	background-image: -o-linear-gradient(to top, pink 3%, red 22%, maroon 99%);
-	background-image: -moz-linear-gradient(to top, pink 3%, red 22%, maroon 99%);
-	background-image: -webkit-linear-gradient(to top, pink 3%, red 22%, maroon 99%);
-	background-image: linear-gradient(to top, pink 3%, red 22%, maroon 99%);
+    background: rgb(2,0,36);
+    background: linear-gradient(7deg, rgba(2,0,36,1) 0%, rgba(9,9,121,0.8799894957983193) 39%, rgba(0,212,255,1) 100%);
 	cursor: pointer;
-  padding-left: 5px;
+    padding-left: 5px;
+    font-size: 15pt;
+
 }
 .start-btn{
     text-align: center;
@@ -191,6 +189,6 @@ body {
 .video-game-button:active, .start-btn:active {
 	box-shadow: none;
 	position: relative;
-	top: .2em;
+    top: .2em;
 }
 </style>

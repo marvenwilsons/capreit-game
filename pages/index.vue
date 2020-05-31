@@ -1,6 +1,6 @@
 <template>
     <v-fade-transition>
-		<div @startGame="startGame" @preGame="preGame" :is="view" ></div>
+		<div :info="info" @startGame="startGame" @preGame="preGame" :is="view" ></div>
     </v-fade-transition>
 </template>
 
@@ -12,7 +12,8 @@ import tlGame from '@/components/tl-game.vue'
 export default {
 	data: () => ({
 		html2canvas: undefined,
-		view: 'tl-start'
+		view: 'tl-start',
+		info: undefined
 	}),
 	components: {
 		'tl-start': tlStart,
@@ -20,11 +21,13 @@ export default {
 		'tl-game' : tlGame
 	},
 	methods: {
-		preGame() {
+		preGame(val) {
 			this.view = 'tl-pre-game'
+			this.info = val
 		},
-		startGame() {
+		startGame(val) {
 			this.view = 'tl-game'
+			console.log(val)
 		}	
 	}
 }
