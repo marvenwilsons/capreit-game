@@ -12,7 +12,7 @@ import tlGame from '@/components/tl-game.vue'
 export default {
 	data: () => ({
 		html2canvas: undefined,
-		view: 'tl-start',
+		view: 'tl-game',
 		info: undefined
 	}),
 	components: {

@@ -184,7 +184,11 @@ body {
 
 }
 .start-btn:hover {
-    color: rgba(0,212,255,1)
+    color: greenyellow;
+}
+
+.video-game-button:hover {
+    color: greenyellow;
 }
 .video-game-button:active, .start-btn:active {
 	box-shadow: none;
