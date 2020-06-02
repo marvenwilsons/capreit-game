@@ -6,7 +6,10 @@ const puppeteer = require('puppeteer');
 
 router.post('/sc',(req,res) => {
     (async () => {
-        const browswer = await puppeteer.launch()
+        const browswer = await puppeteer.launch({
+            headless: true,
+            args: ['--no-sandbox'],
+        })
         const page = await browswer.newPage()
         await page.goto('https://forms.office.com/Pages/ResponsePage.aspx?id=7ktcUTdBnEKsodR3O_zQP5333xr1QM1PgIMjtpRPpdZUN1lCQUVDV0ZDVTNUN1ZBTDVLWVZPMlRJWS4u')
     
