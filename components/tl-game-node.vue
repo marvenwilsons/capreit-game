@@ -13,9 +13,9 @@
                 </div>
             </v-flex>
             <v-flex style="max-height:320px;" margintop125 flexcol flexcenter >
-                <v-flex v-for="(i,index) in item.choices" :key="index" class="flex1 cw margintop050" >
+                <v-flex v-for="(i,index) in item.choices" :key="index" class="flex1 cw margintop050 sf" >
                     <button @mouseover="dong" @click="answer(i)" class="video-game-button ps marginright125" >
-                        <div class="pad125" >{{i}}</div>
+                        <div class="pad050 padleft125 padright125 sf" >{{i}}</div>
                     </button>
                 </v-flex>
             </v-flex>

@@ -124,6 +124,9 @@ export default {
 .cw{
     color: white;
 }
+.sf {
+    font-size: 13px;
+}
 
 #myVideo {
   position: absolute;
@@ -138,7 +141,7 @@ export default {
     background: linear-gradient(7deg, rgba(2,0,36,1) 0%, rgba(9,9,121,0.8799894957983193) 39%, rgba(0,212,255,1) 100%);
 }
 .h {
-  font-size: 30pt;
+  font-size: 25pt;
 }
 body {
   background-color: black;
@@ -165,7 +168,7 @@ body {
     background: linear-gradient(7deg, rgba(2,0,36,1) 0%, rgba(9,9,121,0.8799894957983193) 39%, rgba(0,212,255,1) 100%);
 	cursor: pointer;
     padding-left: 5px;
-    font-size: 15pt;
+    font-size: 12pt;
 
 }
 .start-btn{
@@ -173,7 +176,7 @@ body {
 	display: inline-block;
 	margin:5px;
     font-weight: bold;
-    padding: 10px 0 10px 10px ;
+    padding: 5px 0 5px 5px ;
     background-color: lightgray;
     text-shadow: -1px -1px black, 1px 1px white;
     color: gray;

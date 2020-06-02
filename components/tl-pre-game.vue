@@ -11,10 +11,10 @@
             <source src="sound-effects/game-mech.mp3" type="audio/mp3">
         </audio>
         <v-expand-transition>
-            <div v-if="ready" style="height:80%; width:700px;" class="pad1ln borderRad4" id="mainContent" >
+            <div v-if="ready" style="height:552px; width:700px;" class="pad1ln borderRad4" id="mainContent" >
                 <div class="ps cw">
                     <v-flex h >Game Mechanics</v-flex>
-                    <v-flex>
+                    <v-flex class="sf" >
                         <br>
                         welcome to employee  engagement game 
                         <br> <br>

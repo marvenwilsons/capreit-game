@@ -43,20 +43,31 @@
                 <v-flex fullwidth spacebetween >
                     <div class="flex" >
                         <v-scroll-x-transition>
-                            <div v-if="mounted1" id="mainContent" class="pad125 borderRad4 nodeShadow-w" >
+                            <div v-if="mounted1" id="" class="pad125 borderRad4 nodeShadow-w sf" >
                                 <span class="cw ps" >Player: {{info.player}}</span>
                             </div>
                         </v-scroll-x-transition>
                         <v-scroll-y-transition>
-                        <div v-if="mounted2" id="mainContent" class="pad125 borderRad4 nodeShadow-w marginleft125" >
-                            <span class="cw ps" >Score: {{score}}</span>
+                        <div v-if="mounted2" id="" class="pad125 borderRad4 nodeShadow-w marginleft125" >
+                            <span class="cw ps sf" >Score: {{score}}</span>
                         </div>
                         </v-scroll-y-transition>
                     </div>
                     <v-scroll-x-transition>
-                        <div v-if="mounted3" id="mainContent" style="background" class="pad125 borderRad4 nodeShadow-w" >
-                            <span class="cw ps" >Time Remaining: 00:{{countDown < 10 ? `0${countDown}` : countDown }}</span>
-                        </div>
+                        <div v-if="mounted3" id="mainContent"  class="pad125 borderRad4 nodeShadow-w" >
+                            <v-flex flexcol>
+                                <span class="cw ps sf" >Time Remaining: 00:{{countDown < 10 ? `0${countDown}` : countDown }}</span>
+                                <v-flex class=" spacearround " style="height: 6px;" >
+                                    <div v-for="i in 5" :key="i"  :style="{background:getCountDownColor(i)}" class="flex1 margin050 pad025 nodeShadow-w"></div>
+                                </v-flex>
+                            </v-flex>
+                        </div> 
+
+                        <!-- <v-flex flexcenter fullwidth >
+                            <v-flex style="max-width:50%;" spacearround>
+                                <div v-for="i in 5" :key="i"  :style="{background:getCountDownColor(i)}" class="flex1 margin050 pad050 nodeShadow-w"></div>
+                            </v-flex>
+                        </v-flex> -->
                     </v-scroll-x-transition>
                 </v-flex>
             </div>
@@ -74,11 +85,7 @@
                                 <tl-game-node v-show="nextITemTransition" @onDone="nextItem" :item="gameStack[gamePointer]" ></tl-game-node>
                             </v-scale-transition>
                         </div>
-                        <v-flex flexcenter fullwidth >
-                            <v-flex style="max-width:50%;" spacearround>
-                                <div v-for="i in 5" :key="i"  :style="{background:getCountDownColor(i)}" class="flex1 margin050 pad050 nodeShadow-w"></div>
-                            </v-flex>
-                        </v-flex>
+                        
                     </v-flex>
                 </v-expand-transition>
             </v-flex>
@@ -89,7 +96,7 @@
                     <div class="flex flexcol flexcenter relative" style="max-width: 650px" >
                         <v-expand-transition>
                             <button v-if="show_normalPointsGained"  class="video-game-button ps " >
-                                <div class="pad125 flex" >
+                                <div class="pad050 padleft125 padright125 sf flex" >
                                     normal points gained: <span><animatxt @done="animatxtHandler('threePointsGained')" 
                                         :val="normalPointsGained == undefined ? true : normalPointsGained" 
                                     /></span>x
@@ -98,7 +105,7 @@
                         </v-expand-transition>
                         <v-expand-transition>
                             <button v-if="show_threePointsGained"  class="video-game-button ps margintop125" >
-                                <div class="pad125 flex" >
+                                <div class="pad050 padleft125 padright125 sf flex" >
                                     3 points gained: <span><animatxt @done="animatxtHandler('correctAnswers')" 
                                     :val="threePointsGained == undefined ? true : threePointsGained" 
                                     /></span>x
@@ -107,7 +114,7 @@
                         </v-expand-transition>
                         <v-expand-transition>
                             <button v-if="show_correctAnswers" class="video-game-button ps margintop125" >
-                                <div class="pad125 flex" >
+                                <div class="pad050 padleft125 padright125 sf flex" >
                                     correct answers: <span><animatxt @done="animatxtHandler('wrongAnswers')" 
                                         :val="correctAnswers == undefined ? true : correctAnswers" /></span>x
                                 </div>     
@@ -115,7 +122,7 @@
                         </v-expand-transition>
                         <v-expand-transition>
                             <button v-if="show_wrongAnswers" class="video-game-button ps margintop125" >
-                                <div class="pad125" >
+                                <div class="pad050 padleft125 padright125 sf" >
                                     wrong answers:<span><animatxt @done="animatxtHandler('totalQuestions')" 
                                         :val="wrongAnswers == undefined ? true : wrongAnswers" 
                                         /></span>
@@ -124,7 +131,7 @@
                         </v-expand-transition>
                         <v-expand-transition>
                             <button v-if="show_totalQuestions" class="video-game-button ps margintop125" >
-                                <div class="pad125" >
+                                <div class="pad050 padleft125 padright125 sf" >
                                     total questions: <span><animatxt @done="animatxtHandler('totalScore')" 
                                     :val="totalQuestions == undefined ? true : totalQuestions" /></span>
                                 </div>     
@@ -132,9 +139,10 @@
                         </v-expand-transition>
                         <v-expand-transition>
                             <v-flex v-if="show_totalScore" style="max-width:560px;" flexcenter spacearround>
-                                <h1 class="ps cw " style="color:white;text-shadow: 2px 2px #f03304;"  >Total Score :</h1>
-                                <h1 class="ps cw" style="color:white;text-shadow: 2px 2px #f03304;"  ><animatxt @done="animatxtHandler('playagain')" 
-                                    :val="totalScore == undefined ? true : totalScore" /></h1>
+                                <h1 class="ps cw marginright050" style="color:white;text-shadow: 2px 2px #f03304;font-size:25pt;"  >Total Score </h1>
+                                <h1 class="ps cw" style="color:white;text-shadow: 2px 2px #f03304; font-size:25pt;"  >
+                                    :<animatxt @done="animatxtHandler('playagain')" :val="totalScore == undefined ? true : totalScore" />
+                                </h1>
                             </v-flex>
                         </v-expand-transition>
                         <v-flex>
@@ -248,6 +256,14 @@ export default {
         this.celebs.push(questionNode('Jim Carrey','male'))
         this.celebs.push(questionNode('Justin Bieber','male'))
         this.celebs.push(questionNode('Usher','male'))
+        this.celebs.push(questionNode('Will Smith','male'))
+        this.celebs.push(questionNode('Leonardo DiCarpio','male'))
+        this.celebs.push(questionNode('Michael Buble','male'))
+        this.celebs.push(questionNode('Michael Jackson','male'))
+        this.celebs.push(questionNode('Robbie Williams','male'))
+        this.celebs.push(questionNode('John Travolta','male'))
+        this.celebs.push(questionNode('John Travolta','male'))
+
     },
     watch: {
         celebs() {
