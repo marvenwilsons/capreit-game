@@ -11,3 +11,9 @@ https://www.zapsplat.com/sound-effect-categories/
 
 text-to-speech -> record in obs -> coverts into mp3 afterwards
 https://www.nuance.com/omni-channel-customer-engagement/voice-and-ivr/text-to-speech.html#!
+
+fetch api
+https://attacomsian.com/blog/using-javascript-fetch-api-to-get-and-post-data#
+
+live excel
+https://marvendonque-my.sharepoint.com/:x:/r/personal/marvenwilsons_marvendonque_onmicrosoft_com/_layouts/15/Doc.aspx?sourcedoc=%7BFD21D3DF-367E-4F9E-BC5D-1C2815D99516%7D&file=Capreit%20Game.xlsx&action=default&mobileredirect=true&cid=d5ff852b-7a96-4352-82f2-b84dd47a7d2c

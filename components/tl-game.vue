@@ -84,56 +84,66 @@
             </v-flex>
             <!-- game is done -->
             <v-scale-transition>
-                <v-flex flexcenter v-if="gameIsDone" >
+                <v-flex flexcenter v-if="gameIsDone" relative >
                     <!-- nornal points: 5x, 3 points: 5x, correct answers: #, total questions: ##, total score: ##  -->
-                    <div class="flex flexcol flexcenter" style="max-width: 650px" >
+                    <div class="flex flexcol flexcenter relative" style="max-width: 650px" >
                         <v-expand-transition>
                             <button v-if="show_normalPointsGained"  class="video-game-button ps " >
                                 <div class="pad125 flex" >
-                                    normal points gained: <span><animatxt @done="animatxtHandler('threePointsGained')" :val="normalPointsGained" /></span>x
+                                    normal points gained: <span><animatxt @done="animatxtHandler('threePointsGained')" 
+                                        :val="normalPointsGained == undefined ? true : normalPointsGained" 
+                                    /></span>x
                                 </div>     
                             </button>
                         </v-expand-transition>
                         <v-expand-transition>
                             <button v-if="show_threePointsGained"  class="video-game-button ps margintop125" >
                                 <div class="pad125 flex" >
-                                    3 points gained: <span><animatxt @done="animatxtHandler('correctAnswers')" :val="threePointsGained" /></span>x
+                                    3 points gained: <span><animatxt @done="animatxtHandler('correctAnswers')" 
+                                    :val="threePointsGained == undefined ? true : threePointsGained" 
+                                    /></span>x
                                 </div>     
                             </button>
                         </v-expand-transition>
                         <v-expand-transition>
                             <button v-if="show_correctAnswers" class="video-game-button ps margintop125" >
                                 <div class="pad125 flex" >
-                                    correct answers: <span><animatxt @done="animatxtHandler('wrongAnswers')" :val="correctAnswers" /></span>x
+                                    correct answers: <span><animatxt @done="animatxtHandler('wrongAnswers')" 
+                                        :val="correctAnswers == undefined ? true : correctAnswers" /></span>x
                                 </div>     
                             </button>
                         </v-expand-transition>
                         <v-expand-transition>
                             <button v-if="show_wrongAnswers" class="video-game-button ps margintop125" >
                                 <div class="pad125" >
-                                    wrong answers:<span><animatxt @done="animatxtHandler('totalQuestions')" :val="wrongAnswers" /></span>
-                                </div>     
+                                    wrong answers:<span><animatxt @done="animatxtHandler('totalQuestions')" 
+                                        :val="wrongAnswers == undefined ? true : wrongAnswers" 
+                                        /></span>
+                                </div>
                             </button>
                         </v-expand-transition>
                         <v-expand-transition>
                             <button v-if="show_totalQuestions" class="video-game-button ps margintop125" >
                                 <div class="pad125" >
-                                    total questions: <span><animatxt @done="animatxtHandler('totalScore')" :val="totalQuestions" /></span>
+                                    total questions: <span><animatxt @done="animatxtHandler('totalScore')" 
+                                    :val="totalQuestions == undefined ? true : totalQuestions" /></span>
                                 </div>     
                             </button>
                         </v-expand-transition>
                         <v-expand-transition>
                             <v-flex v-if="show_totalScore" style="max-width:560px;" flexcenter spacearround>
                                 <h1 class="ps cw " style="color:white;text-shadow: 2px 2px #f03304;"  >Total Score :</h1>
-                                <h1 class="ps cw" style="color:white;text-shadow: 2px 2px #f03304;"  ><animatxt @done="animatxtHandler('playagain')" :val="totalScore" /></h1>
-                                
+                                <h1 class="ps cw" style="color:white;text-shadow: 2px 2px #f03304;"  ><animatxt @done="animatxtHandler('playagain')" 
+                                    :val="totalScore == undefined ? true : totalScore" /></h1>
                             </v-flex>
                         </v-expand-transition>
-                        <v-expand-transition>
-                            <h4 @click="playagain" v-if="playAgain" class="cw pointer" >
+                        <v-flex>
+                            <h6 @click="playagain" v-if="playAgain" class="gbtn cw pointer marginright125 ps" >
                                 Play Again
-                            </h4>
-                        </v-expand-transition>
+                            </h6>
+                            <h6>|</h6>
+                            <h6 v-if="playAgain" class="cw pointer marginleft125 ps gbtn" >Submit</h6>
+                        </v-flex>
                     </div>
     
                 </v-flex>
@@ -317,19 +327,6 @@ export default {
                     let random = []
                     for(var i = 0; i < 3; i++) {
                         const myitem = celebs[gender][this.generateRandNumExcept(answerIndex,celebs[gender].length - 1)]
-                        // 
-                        // const populateRandom = () => {
-                        //     if(random.includes(myitem)) {
-                        //         // 1. get a new index except the itemIndex
-                        //         // 2. check random array using the new index
-                        //         // 3. if index exist go back to 1, if not push to random array
-                        //         console.log('duplicate')
-                        //         populateRandom()
-                        //     } else {
-                        //         const myitem = celebs[gender][this.generateRandNumExcept(answerIndex,celebs[gender].length - 1)]
-                        //         random.push(myitem)
-                        //     }
-                        // }
                         random.push(myitem)
                         // 
                         if(random.length == 0) {
@@ -456,6 +453,9 @@ export default {
                     triton.pause()
 
                     this.totalScore = this.score
+
+                    this.submitScore()
+
                     // restore defaults
                     this.gameIsDone = true
                     this.countDown = 59
@@ -485,6 +485,21 @@ export default {
                 }
                 
             }, 1000);
+        },
+        submitScore() {
+            // todo
+            const url = undefined
+            const ctx = {
+                email: '',
+                score: this.score
+            }
+            const options = {
+                method: 'POST',
+                body: JSON.stringify(ctx),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
         },
         //  onGaming
         nextItem(val) {
@@ -578,14 +593,15 @@ export default {
                 }
                 if(val == 'playagain') {
                     this.playAgain = true
+                    playInfoSound()
                 }
-            }, 250);
+            }, 500);
         },
         loadScoreBoard() {
             this.show_normalPointsGained = true
         },
         playagain() {
-
+            this.$emit('playAgain')
         }
         
     }
@@ -599,5 +615,9 @@ export default {
 }
 .nodeShadow-w{
     box-shadow: 0px 0px 13px -5px rgba(241, 241, 241, 0.75);
+}
+.gbtn:hover {
+    color: yellowgreen;
+    text-shadow: 2px 2px #f03304;
 }
 </style>

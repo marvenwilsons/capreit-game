@@ -20,23 +20,35 @@ export default {
         const pling = document.getElementById('pling')
         const ing = document.getElementById('ing')
 
-        ding.volume = 0.2
-        pling.volume = 0.5
-        ing.volume = 0.6
-        const myInterval = setInterval(() => {
-            if(this.dat != parseInt(this.val)) {
-                ding.currentTime = 0.0
-                ding.play()
-                pling.currentTime = 0.0
-                pling.play()
-                ing.currentTime = 0.0
-                ing.play()
-                this.dat++
-            } else {
-                clearInterval(myInterval)
-                this.$emit('done')
-            }
-        },60)
+        ding.volume = 0.5
+        pling.volume = 0.3
+        ing.volume = 0.2
+
+        const playSound = () => {
+            ding.currentTime = 0.0
+            ding.play()
+            pling.currentTime = 0.0
+            pling.play()
+            ing.currentTime = 0.0
+            ing.play()
+        }
+
+        if(this.val != true) {
+            const myInterval = setInterval(() => {
+                if(this.dat != parseInt(this.val)) {
+                    playSound()
+                    this.dat++
+                } else {
+                    playSound()
+                    clearInterval(myInterval)
+                    this.$emit('done')
+                }
+            },95)
+        } else {
+            playSound()
+            this.$emit('done')
+        }
+
     }
 }
 </script>

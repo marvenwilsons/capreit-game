@@ -1,4 +1,5 @@
 const colors = require('vuetify/es5/util/colors').default
+const bodyParser = require('body-parser')
 
 module.exports = {
   mode: 'universal',
@@ -74,5 +75,10 @@ module.exports = {
     */
     extend (config, ctx) {
     }
-  }
+  },
+
+  serverMiddleware: [
+    bodyParser.json(),
+    '~/server/cap.js',
+  ]
 }

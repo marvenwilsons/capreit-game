@@ -1,6 +1,6 @@
 <template>
     <v-fade-transition>
-		<div :info="info" @startGame="startGame" @preGame="preGame" :is="view" ></div>
+		<div :info="info" @playAgain="playAgain" @startGame="startGame" @preGame="preGame" :is="view" ></div>
     </v-fade-transition>
 </template>
 
@@ -8,6 +8,7 @@
 import tlStart from '@/components/tl-start.vue'
 import tlPreGame from '@/components/tl-pre-game.vue'
 import tlGame from '@/components/tl-game.vue'
+import tlPreGame2 from '@/components/tl-pre-game-2.vue'
 
 export default {
 	data: () => ({
@@ -18,7 +19,8 @@ export default {
 	components: {
 		'tl-start': tlStart,
 		'tl-pre-game': tlPreGame,
-		'tl-game' : tlGame
+		'tl-game' : tlGame,
+		'tl-pre-game2': tlPreGame2
 	},
 	methods: {
 		preGame(val) {
@@ -27,8 +29,11 @@ export default {
 		},
 		startGame(val) {
 			this.view = 'tl-game'
-			console.log(val)
-		}	
+		},
+		playAgain() {
+			console.log('reseting')
+			this.view = 'tl-pre-game2'
+		}
 	}
 }
 </script>

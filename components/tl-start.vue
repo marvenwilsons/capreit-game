@@ -84,11 +84,13 @@ export default {
     methods: {
         soundEffect() {
             const n = document.getElementById('dong')
+            n.currentTime = 0.0
             n.play()
             n.volume = 1
         },
         keyboardEffect() {
             const n = document.getElementById('tong')
+            n.currentTime = 0.0
             n.play()
             n.volume = 0.1
         },
