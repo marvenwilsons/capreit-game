@@ -36,6 +36,8 @@ export default {
         },
         dong() {
             const dong = document.getElementById('dong')
+            dong.volume = 1
+            dong.currentTime = 0.0
             dong.play()
         }
     }

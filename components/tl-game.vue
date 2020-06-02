@@ -44,7 +44,7 @@
                     <div class="flex" >
                         <v-scroll-x-transition>
                             <div v-if="mounted1" id="mainContent" class="pad125 borderRad4 nodeShadow-w" >
-                                <span class="cw ps" >Player: {{info.player}}</span>
+                                <!-- <span class="cw ps" >Player: {{info.player}}</span> -->
                             </div>
                         </v-scroll-x-transition>
                         <v-scroll-y-transition>
@@ -82,9 +82,60 @@
                     </v-flex>
                 </v-expand-transition>
             </v-flex>
+            <!-- game is done -->
             <v-scale-transition>
                 <v-flex flexcenter v-if="gameIsDone" >
-                    game is done!
+                    <!-- nornal points: 5x, 3 points: 5x, correct answers: #, total questions: ##, total score: ##  -->
+                    <div class="flex flexcol flexcenter" style="max-width: 650px" >
+                        <v-expand-transition>
+                            <button v-if="show_normalPointsGained"  class="video-game-button ps " >
+                                <div class="pad125 flex" >
+                                    normal points gained: <span><animatxt @done="animatxtHandler('threePointsGained')" :val="normalPointsGained" /></span>x
+                                </div>     
+                            </button>
+                        </v-expand-transition>
+                        <v-expand-transition>
+                            <button v-if="show_threePointsGained"  class="video-game-button ps margintop125" >
+                                <div class="pad125 flex" >
+                                    3 points gained: <span><animatxt @done="animatxtHandler('correctAnswers')" :val="threePointsGained" /></span>x
+                                </div>     
+                            </button>
+                        </v-expand-transition>
+                        <v-expand-transition>
+                            <button v-if="show_correctAnswers" class="video-game-button ps margintop125" >
+                                <div class="pad125 flex" >
+                                    correct answers: <span><animatxt @done="animatxtHandler('wrongAnswers')" :val="correctAnswers" /></span>x
+                                </div>     
+                            </button>
+                        </v-expand-transition>
+                        <v-expand-transition>
+                            <button v-if="show_wrongAnswers" class="video-game-button ps margintop125" >
+                                <div class="pad125" >
+                                    wrong answers:<span><animatxt @done="animatxtHandler('totalQuestions')" :val="wrongAnswers" /></span>
+                                </div>     
+                            </button>
+                        </v-expand-transition>
+                        <v-expand-transition>
+                            <button v-if="show_totalQuestions" class="video-game-button ps margintop125" >
+                                <div class="pad125" >
+                                    total questions: <span><animatxt @done="animatxtHandler('totalScore')" :val="totalQuestions" /></span>
+                                </div>     
+                            </button>
+                        </v-expand-transition>
+                        <v-expand-transition>
+                            <v-flex v-if="show_totalScore" style="max-width:560px;" flexcenter spacearround>
+                                <h1 class="ps cw " style="color:white;text-shadow: 2px 2px #f03304;"  >Total Score :</h1>
+                                <h1 class="ps cw" style="color:white;text-shadow: 2px 2px #f03304;"  ><animatxt @done="animatxtHandler('playagain')" :val="totalScore" /></h1>
+                                
+                            </v-flex>
+                        </v-expand-transition>
+                        <v-expand-transition>
+                            <h4 @click="playagain" v-if="playAgain" class="cw pointer" >
+                                Play Again
+                            </h4>
+                        </v-expand-transition>
+                    </div>
+    
                 </v-flex>
             </v-scale-transition>
         </v-flex>
@@ -94,10 +145,12 @@
 
 <script>
 import tlGameNode from './tl-game-node'
+import animatxt from './animatxt'
+import gameBtn from './game-btn'
 
 export default {
     props: ['info'],
-    components: {'tl-game-node':tlGameNode},
+    components: {'tl-game-node':tlGameNode,animatxt,gameBtn},
     data: () => ({
         mounted1: false,
         mounted2: false,
@@ -106,7 +159,7 @@ export default {
 
         // initializing game
         startGameCountDown: 5,
-        countDown: 59,
+        countDown: 59, // 59
         
         // on game
         celebs: [],
@@ -115,7 +168,28 @@ export default {
         itemCountDown: 5,
         nextITemTransition: true,
         gameIsDone: false,
-        score: 0
+        score: 0,
+
+        // on score board
+        normalPointsGained: undefined,
+        show_normalPointsGained: false,
+
+        threePointsGained: undefined,
+        show_threePointsGained: false,
+
+        correctAnswers: undefined,
+        show_correctAnswers: false,
+
+        wrongAnswers: undefined,
+        show_wrongAnswers: undefined,
+        
+        totalQuestions: 1,
+        show_totalQuestions: false,
+
+        totalScore: undefined,
+        show_totalScore: false,
+
+        playAgain: false
     }),
     mounted() {
         // test 1
@@ -375,11 +449,13 @@ export default {
                     clearInterval(myCountDown)
                     
                     const win = document.getElementById('win')
+                    win.volume = 0.6
                     win.play()
 
                     const triton = document.getElementById('triton-audio')
                     triton.pause()
 
+                    this.totalScore = this.score
                     // restore defaults
                     this.gameIsDone = true
                     this.countDown = 59
@@ -398,6 +474,8 @@ export default {
                             }, 250);
                         }, 250);
                     }, 500);
+
+                    this.loadScoreBoard()
                 }
 
                 if(this.countDown <= 10) {
@@ -417,7 +495,7 @@ export default {
             const unstoppable = document.getElementById('unstoppable')
             if(val == 1) {
                 
-
+                this.totalQuestions = this.totalQuestions + 1
                 if(this.itemCountDown == 5) {
                     this.score = this.score + 3
                     unlocklevel.volume = 0.3
@@ -427,15 +505,44 @@ export default {
                     unstoppable.volume = 0.2
                     unstoppable.currentTime = 0.0
                     unstoppable.play()
+
+                    if(this.threePointsGained == undefined) {
+                        this.threePointsGained = 1
+                    } else {
+                        this.threePointsGained = this.threePointsGained + 1
+                    }
+                    
+                    if(this.correctAnswers == undefined) {
+                        this.correctAnswers = 1
+                    } else {
+                        this.correctAnswers = this.correctAnswers + 1
+                    }
                 } else {
                     this.score = this.score + 1
                     pling.currentTime = 0.0
                     pling.play()
+
+                    if(this.normalPointsGained == undefined) {
+                        this.normalPointsGained = 1
+                    } else {
+                        this.normalPointsGained = this.normalPointsGained + 1
+                    }
+
+                    if(this.correctAnswers == undefined) {
+                        this.correctAnswers = 1
+                    } else {
+                        this.correctAnswers = this.correctAnswers + 1
+                    }
                 }
             } else {
                 wrong.volume = 0.5
                 wrong.currentTime = 0.0
                 wrong.play()
+                if(this.wrongAnswers == undefined) {
+                    this.wrongAnswers = 1
+                } else {
+                    this.wrongAnswers = this.wrongAnswers + 1
+                }
             }
 
             if(this.gamePointer == this.gameStack.length - 1) {
@@ -445,6 +552,40 @@ export default {
                 this.gamePointer = this.gamePointer + 1
             }
             this.itemCountDown = 6
+        },
+        animatxtHandler(val) {
+            const infoOut = document.getElementById('signFalls')
+            const playInfoSound = () => {
+                infoOut.currentTime = 0.0
+                infoOut.play()
+            }
+
+            setTimeout(() => {
+                if(val == 'threePointsGained') {
+                    this.show_threePointsGained = true
+                }
+                if(val == 'correctAnswers') {
+                    this.show_correctAnswers = true
+                }
+                if(val == 'wrongAnswers') {
+                    this.show_wrongAnswers = true
+                }
+                if(val == 'totalQuestions') {
+                    this.show_totalQuestions = true
+                }
+                if(val == 'totalScore') {
+                    this.show_totalScore = true
+                }
+                if(val == 'playagain') {
+                    this.playAgain = true
+                }
+            }, 250);
+        },
+        loadScoreBoard() {
+            this.show_normalPointsGained = true
+        },
+        playagain() {
+
         }
         
     }
