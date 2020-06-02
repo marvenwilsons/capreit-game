@@ -34,7 +34,6 @@ export default {
 			this.view = 'tl-game'
 		},
 		playAgain() {
-			console.log('reseting')
 			this.view = 'tl-pre-game2'
 		},
 		gameCredits() {
