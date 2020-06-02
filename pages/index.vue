@@ -1,6 +1,6 @@
 <template>
     <v-fade-transition>
-		<div :info="info" @playAgain="playAgain" @startGame="startGame" @preGame="preGame" :is="view" ></div>
+		<div :info="info" @gameCredits="gameCredits" @playAgain="playAgain" @startGame="startGame" @preGame="preGame" :is="view" ></div>
     </v-fade-transition>
 </template>
 
@@ -9,6 +9,7 @@ import tlStart from '@/components/tl-start.vue'
 import tlPreGame from '@/components/tl-pre-game.vue'
 import tlGame from '@/components/tl-game.vue'
 import tlPreGame2 from '@/components/tl-pre-game-2.vue'
+import gameCredits from '@/components/credits.vue'
 // import * as firebase from 'firebase'
 
 export default {
@@ -21,7 +22,8 @@ export default {
 		'tl-start': tlStart,
 		'tl-pre-game': tlPreGame,
 		'tl-game' : tlGame,
-		'tl-pre-game2': tlPreGame2
+		'tl-pre-game2': tlPreGame2,
+		gameCredits
 	},
 	methods: {
 		preGame(val) {
@@ -34,6 +36,9 @@ export default {
 		playAgain() {
 			console.log('reseting')
 			this.view = 'tl-pre-game2'
+		},
+		gameCredits() {
+			this.view = 'gameCredits'
 		}
 	},
 	mounted() {

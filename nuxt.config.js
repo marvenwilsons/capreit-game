@@ -80,5 +80,6 @@ module.exports = {
   serverMiddleware: [
     bodyParser.json(),
     '~/server/cap.js',
+    // '~/server/spreadsheet.js'
   ]
 }

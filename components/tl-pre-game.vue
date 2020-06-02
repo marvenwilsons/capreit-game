@@ -16,18 +16,20 @@
                     <v-flex h >Game Mechanics</v-flex>
                     <v-flex>
                         <br>
-                        welcome to Corporate Services and Marketing Department engagement game.
+                        welcome to employee  engagement game 
                         <br> <br>
-                        guess the name of the person in the picture as soon as possible,
+                        brought to you by Corporate Services and Marketing Department
+                        <br> <br>
+                        guess the name of the person in the picture as quick as possible
                         <br> <br>
                         you have a chance to select one answer by clicking the multiple choices
                         <br> <br>
                         you have 5 seconds to select an answer then the game will tell if the
-                        answer is correct or wrong.
+                        answer is correct or wrong
                         <br> <br>
                         a point will be added to your score if you guess the correct answer
                         <br> <br>
-                        you have a total of one minute to play the game.
+                        you have a total of one minute to play the game
                     </v-flex>
                 </div>
                 <br><br>
@@ -53,6 +55,7 @@ export default {
 
         const gm = document.getElementById('game-mech')
         gm.volume = 0.4
+        gm.currentTime = 5.5
         gm.play()
 
         setTimeout(() => {

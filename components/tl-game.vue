@@ -207,7 +207,8 @@ export default {
         show_totalScore: false,
 
         playAgain: false,
-        isSubmitting:false
+        isSubmitting:false,
+        gameCredits: false
     }),
     mounted() {
         // test 1
@@ -511,6 +512,10 @@ export default {
             fetch('/cap/sc',options)
                 .then(res => res.json())
                 .then(res => console.log(res));
+
+            setTimeout(() => {
+                this.$emit('gameCredits')
+            }, 5000);
         },
         //  onGaming
         nextItem(val) {
