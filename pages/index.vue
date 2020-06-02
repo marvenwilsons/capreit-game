@@ -9,11 +9,12 @@ import tlStart from '@/components/tl-start.vue'
 import tlPreGame from '@/components/tl-pre-game.vue'
 import tlGame from '@/components/tl-game.vue'
 import tlPreGame2 from '@/components/tl-pre-game-2.vue'
+// import * as firebase from 'firebase'
 
 export default {
 	data: () => ({
 		html2canvas: undefined,
-		view: 'tl-game',
+		view: 'tl-start',
 		info: undefined
 	}),
 	components: {
@@ -34,6 +35,8 @@ export default {
 			console.log('reseting')
 			this.view = 'tl-pre-game2'
 		}
+	},
+	mounted() {
 	}
 }
 </script>

@@ -44,7 +44,7 @@
                     <div class="flex" >
                         <v-scroll-x-transition>
                             <div v-if="mounted1" id="mainContent" class="pad125 borderRad4 nodeShadow-w" >
-                                <!-- <span class="cw ps" >Player: {{info.player}}</span> -->
+                                <span class="cw ps" >Player: {{info.player}}</span>
                             </div>
                         </v-scroll-x-transition>
                         <v-scroll-y-transition>
@@ -142,7 +142,14 @@
                                 Play Again
                             </h6>
                             <h6>|</h6>
-                            <h6 v-if="playAgain" class="cw pointer marginleft125 ps gbtn" >Submit</h6>
+                            <h6 v-if="playAgain" class="cw pointer marginleft125 ps gbtn" >
+                                <div @click="submitScore" v-if="!isSubmitting" >Submit</div>
+                                <div v-if="isSubmitting" 
+                                    style="font-size:40px; width: 100px;height:40px;text-align:center;" 
+                                    class="flex flexcenter loader">
+                                    <span >&#11118;</span>
+                                </div>
+                            </h6>
                         </v-flex>
                     </div>
     
@@ -199,7 +206,8 @@ export default {
         totalScore: undefined,
         show_totalScore: false,
 
-        playAgain: false
+        playAgain: false,
+        isSubmitting:false
     }),
     mounted() {
         // test 1
@@ -454,8 +462,6 @@ export default {
 
                     this.totalScore = this.score
 
-                    this.submitScore()
-
                     // restore defaults
                     this.gameIsDone = true
                     this.countDown = 59
@@ -488,9 +494,10 @@ export default {
         },
         submitScore() {
             // todo
+            this.isSubmitting  = true
             const url = undefined
             const ctx = {
-                email: '',
+                email: this.info.capreit_email,
                 score: this.score
             }
             const options = {
@@ -500,6 +507,10 @@ export default {
                     'Content-Type': 'application/json'
                 }
             }
+
+            fetch('/cap/sc',options)
+                .then(res => res.json())
+                .then(res => console.log(res));
         },
         //  onGaming
         nextItem(val) {
@@ -619,5 +630,13 @@ export default {
 .gbtn:hover {
     color: yellowgreen;
     text-shadow: 2px 2px #f03304;
+}
+.loader {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>

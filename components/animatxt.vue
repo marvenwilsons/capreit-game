@@ -20,9 +20,9 @@ export default {
         const pling = document.getElementById('pling')
         const ing = document.getElementById('ing')
 
-        ding.volume = 0.5
-        pling.volume = 0.3
-        ing.volume = 0.2
+        ding.volume = 0.4
+        pling.volume = 0.1
+        ing.volume = 0.1
 
         const playSound = () => {
             ding.currentTime = 0.0
