@@ -35,14 +35,14 @@
                             background-color="white"
                             class="ps"
                             outlined
-                            placeholder="Player Name"
+                            placeholder="Full Name"
                         ></v-text-field>
                         <v-text-field
-                            v-model="email"
+                            v-model="office_location"
                             background-color="white"
                             class="ps"
                             outlined
-                            placeholder="Capreit Email Address"
+                            placeholder="Office Location"
                         ></v-text-field>
                     </v-flex>
                     <v-flex  flexend >
@@ -71,7 +71,7 @@
 export default {
     data: () => ({
         playerName: undefined,
-        email: undefined,
+        office_location: undefined,
         show: false,
         ready: true,
         showNotice: true
@@ -80,7 +80,7 @@ export default {
         playerName() {
             this.keyboardEffect()
         },
-        email() {
+        office_location() {
             this.keyboardEffect()
         }
     },
@@ -108,7 +108,7 @@ export default {
             n.volume = 0.5
         },
         playGame() {
-            if(this.playerName && this.email) {
+            if(this.playerName && this.office_location) {
                 const n = document.getElementById('play')
                 n.volume = 0.4
                 n.play()
@@ -119,7 +119,7 @@ export default {
                         setTimeout(() => {
                             this.$emit('preGame', {
                                 player: this.playerName,
-                                capreit_email: this.email
+                                office_location: this.office_location
                             })
                         }, 100);
                     }, 700);

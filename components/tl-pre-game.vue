@@ -24,12 +24,12 @@
                         <br> <br>
                         you have a chance to select one answer by clicking the multiple choices
                         <br> <br>
-                        you have 5 seconds to select an answer then the game will tell if the
+                        you have 15 seconds to select an answer then the game will tell if the
                         answer is correct or wrong
                         <br> <br>
                         a point will be added to your score if you guess the correct answer
                         <br> <br>
-                        you have a total of one minute to play the game
+                        you have a total of 2 minutes and 30 seconds to play the game
                     </v-flex>
                 </div>
                 <br><br>
@@ -55,7 +55,7 @@ export default {
 
         const gm = document.getElementById('game-mech')
         gm.volume = 0.4
-        gm.currentTime = 5.5
+        gm.currentTime = 0.0
         gm.play()
 
         setTimeout(() => {
@@ -68,7 +68,7 @@ export default {
                     setTimeout(() => {
                         this.$emit('startGame', {
                             player: this.playerName,
-                            capreit_email: this.email
+                            office_location: this.office_location
                         })
                     },100)
                 }

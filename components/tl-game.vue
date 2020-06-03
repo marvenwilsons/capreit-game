@@ -44,7 +44,7 @@
                     <div class="flex" >
                         <v-scroll-x-transition>
                             <div v-if="mounted1" id="" class="pad125 borderRad4 nodeShadow-w sf" >
-                                <!-- <span class="cw ps" >Player: {{info.player}}</span> -->
+                                <span class="cw ps" >Player: {{info.player}}</span>
                             </div>
                         </v-scroll-x-transition>
                         <v-scroll-y-transition>
@@ -60,7 +60,7 @@
                                     Time Remaining: {{countDownMin}}:{{countDown < 10 ? `0${countDown}` : countDown }}
                                 </span>
                                 <v-flex class=" spacearround " style="height: 6px;" >
-                                    <div v-for="i in 5" :key="i"  :style="{background:getCountDownColor(i)}" class="flex1 margin050 pad025 nodeShadow-w"></div>
+                                    <div v-for="i in 15" :key="i"  :style="{background:getCountDownColor(i)}" class="flex1 marginright025 pad025 nodeShadow-w"></div>
                                 </v-flex>
                             </v-flex>
                         </div> 
@@ -186,14 +186,14 @@ export default {
 
         // initializing game
         startGameCountDown: 5,
-        countDownMin: 4,
-        countDown: 59, // 59
+        countDownMin: 2,
+        countDown: 30, // 59
         
         // on game
         celebs: [],
         gameStack: [],
         gamePointer: 0,
-        itemCountDown: 5,
+        itemCountDown: 15,
         nextITemTransition: true,
         gameIsDone: false,
         score: 0,
@@ -223,6 +223,7 @@ export default {
     }),
     mounted() {
         // test 1
+        console.log(this.info)
         this.startGameOnLoadCountDown()
 
         const questionNode = (piclink_and_answer, gender) => {
@@ -537,7 +538,7 @@ export default {
 
                     // restore defaults
                     this.gameIsDone = true
-                    this.countDown = 59
+                    this.countDown = 30
 
                     const infoOut = document.getElementById('cs6')
                     infoOut.volume = 1
@@ -562,7 +563,7 @@ export default {
                     this.countDown = 59
                 }
 
-                if(this.countDown <= 10) {
+                if(this.countDown <= 10 && this.countDownMin == 0) {
                     const cssound = document.getElementById('cs6')
                     cssound.currentTime = 0.0
                     cssound.play()
@@ -575,7 +576,8 @@ export default {
             this.isSubmitting  = true
             const url = undefined
             const ctx = {
-                email: this.info.capreit_email,
+                player: this.info.player,
+                office_location: this.info.office_location,
                 score: this.score
             }
             const options = {
@@ -604,7 +606,7 @@ export default {
             if(val == 1) {
                 
                 this.totalQuestions = this.totalQuestions + 1
-                if(this.itemCountDown == 5) {
+                if(this.itemCountDown == 15) {
                     this.score = this.score + 3
                     unlocklevel.volume = 0.3
                     unlocklevel.currentIndex = 0.0
@@ -662,7 +664,7 @@ export default {
                 this.gamePointer = this.gamePointer + 1
             }
 
-            this.itemCountDown = 6
+            this.itemCountDown = 16
         },
         animatxtHandler(val) {
             const infoOut = document.getElementById('signFalls')

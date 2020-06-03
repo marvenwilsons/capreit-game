@@ -11,10 +11,11 @@ router.post('/sc',(req,res) => {
             args: ['--no-sandbox'],
         })
         const page = await browswer.newPage()
-        await page.goto('https://forms.office.com/Pages/ResponsePage.aspx?id=7ktcUTdBnEKsodR3O_zQP5333xr1QM1PgIMjtpRPpdZUN1lCQUVDV0ZDVTNUN1ZBTDVLWVZPMlRJWS4u')
+        await page.goto('https://forms.office.com/Pages/ResponsePage.aspx?id=7ktcUTdBnEKsodR3O_zQP5333xr1QM1PgIMjtpRPpdZURUZGRjNKWDJXSEVTNTFCUlZKUzE1TkdKVC4u')
     
-        await page.type("input[placeholder='Enter your answer']", `${req.body.email}`)
-        await page.type("input[placeholder='The value must be a number']", `${req.body.score}`)
+        await page.type("input[aria-labelledby='question1-title question1-questiontype']", `${req.body.player}`)
+        await page.type("input[aria-labelledby='question2-title question2-questiontype']", `${req.body.office_location}`)
+        await page.type("input[aria-labelledby='question3-title question3-questiontype']", `${req.body.score}`)
     
         await page.click('.office-form-bottom-button')
         await page.screenshot({path: 'example.png'})
