@@ -53,9 +53,9 @@
                 </div>
                 <div v-if="show == false && showNotice == true" id="mainContent" style="min-width:500px;max-width:500px;" class="borderRad4 pad1ln nodeShadow cw ps sf nodeShadow-w" >
                     <v-flex>
-                        Notice <br> <br> This game play's a background music that may be loud for you <br> <br> 
-                        for a pleasant gaming experience,  
-                        please adjust or lower your volume levels now. <br> <br>
+                        Notice <br> <br> This game plays a background music that may be loud for you. <br> <br> 
+                        For pleasant gaming experience,  
+                        please adjust your volume levels. <br> <br>
                         click "OKAY" to start
                     </v-flex>
                     <v-flex flexend >
