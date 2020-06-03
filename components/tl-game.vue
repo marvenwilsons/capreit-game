@@ -44,7 +44,7 @@
                     <div class="flex" >
                         <v-scroll-x-transition>
                             <div v-if="mounted1" id="" class="pad125 borderRad4 nodeShadow-w sf" >
-                                <span class="cw ps" >Player: {{info.player}}</span>
+                                <!-- <span class="cw ps" >Player: {{info.player}}</span> -->
                             </div>
                         </v-scroll-x-transition>
                         <v-scroll-y-transition>
@@ -361,9 +361,56 @@ export default {
                             populateRandom()
                         }
                     }
+                    let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) != index)
+                    
                     random.push(answer)
                     random = this.shuffle(random)
-                    return random
+                    
+                    if(findDuplicates(random).length != 0) {
+                        // console.log('dup -->',random)
+                        const uniqueArray = new Set(random)
+                        const backToArray = [...uniqueArray]
+                        const inidexes = backToArray.map(celebName => {
+                            return celebs[gender].indexOf(celebName)
+                        })
+                        // console.log('set',backToArray, answer)
+                        // console.log(inidexes, '---', celebs[gender].indexOf(answer) )
+                        // gen a new index
+                        const getUniqueIndex = () => {
+                            function getRandomInt(min, max) {
+                                min = Math.ceil(min);
+                                max = Math.floor(max);
+                                return Math.floor(Math.random() * (max - min + 1)) + min;
+                            }
+
+                            const newRandomInt = getRandomInt(0,celebs[gender].length - 1)
+
+                            if(inidexes.indexOf(newRandomInt) == -1) {
+                                
+                                return newRandomInt
+                            } else {
+                                getUniqueIndex()
+                            }
+                        }
+
+                        random = backToArray
+
+                        const initalIndex = getUniqueIndex()
+                        let finalIndex = undefined
+                        if(initalIndex  == undefined) {
+                            finalIndex = getUniqueIndex()
+                        } else {
+                            finalIndex = initalIndex
+                        }
+
+                        random.push(celebs[gender][finalIndex])
+                        random = this.shuffle(random)
+                        return random
+                    } else {
+                        return random
+                    }
+
+        
                 })(),
                 answer
             }

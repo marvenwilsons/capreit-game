@@ -15,7 +15,7 @@ import gameCredits from '@/components/credits.vue'
 export default {
 	data: () => ({
 		html2canvas: undefined,
-		view: 'tl-start',
+		view: 'tl-game',
 		info: undefined
 	}),
 	components: {
