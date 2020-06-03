@@ -1,10 +1,10 @@
 <template>
     <v-flex style="background:black;" relative fullheight-percent flex1 flexcenter flexcol  >
-        <v-flex pad1ln margin125 style="z-index: 900; background:rgba(51, 51, 51, 0.89); max-height:62%;" borderRad4 flexcol nodeShadow-w >
+        <v-flex pad1ln margin125 style="z-index: 900; background:rgba(51, 51, 51, 0.89); max-height:600px;" borderRad4 flexcol nodeShadow-w >
             <audio id="cyclone-audio" autoplay loop>
                 <source src="music/cyclone.mp3" type="audio/mp3">
             </audio>
-            <h4 class="cw ps" >Special Thanks to:</h4>
+            <h4 class="cw ps" >Special Thanks to</h4>
             <button  class="video-game-button ps marginbottom125" >
                 <div class="pad050 padleft125 padright125 sf flex" >
                     Abhishek Gandhi - contributor

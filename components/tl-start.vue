@@ -5,7 +5,7 @@
                 <source src="video/vid-bg1.mp4" type="video/mp4">
                 Your browser does not support HTML5 video.
             </video>
-            <audio id="tl-audio" autoplay loop>
+            <audio id="tl-audio" loop>
                 <source src="music/epic.mp3" type="audio/mp3">
             </audio>
             <audio id="dong">
@@ -18,7 +18,7 @@
                 <source src="sound-effects/SFX - Evil Spawner Dispense.mp3" type="audio/mp3">
             </audio>
             <v-expand-transition>
-                <div v-if="show" id="mainContent" style="min-width:500px;" class="borderRad4 pad1ln nodeShadow" >
+                <div v-if="show" id="mainContent" style="min-width:500px;" class="borderRad4 pad1ln nodeShadow-w" >
                     <h4 class="ps h" >
                         <div style="color:white;text-shadow: 2px 2px #f03304;" class="flex flexcol flexcenter" >
                             <span>
@@ -47,8 +47,19 @@
                     </v-flex>
                     <v-flex  flexend >
                         <button @click="playGame" @mouseover="soundEffect" class="ps start-btn h" >
-                            Play
+                            <div class="padleft125 padright125" >Play</div>
                         </button>
+                    </v-flex>
+                </div>
+                <div v-if="show == false && showNotice == true" id="mainContent" style="min-width:500px;max-width:500px;" class="borderRad4 pad1ln nodeShadow cw ps sf nodeShadow-w" >
+                    <v-flex>
+                        Notice <br> <br> This game play's a background music that may be loud for you <br> <br> 
+                        for a pleasant gaming experience,  
+                        please adjust or lower your volume levels now. <br> <br>
+                        click "OKAY" to start
+                    </v-flex>
+                    <v-flex flexend >
+                        <v-btn @click="start" class="margintop125" >Okay</v-btn>
                     </v-flex>
                 </div>
             </v-expand-transition>
@@ -62,17 +73,9 @@ export default {
         playerName: undefined,
         email: undefined,
         show: false,
-        ready: true
+        ready: true,
+        showNotice: true
     }),
-    mounted() {
-        const audio = document.getElementById('tl-audio')
-        audio.play()
-        audio.volume = 0.2;
-        setTimeout(() => {
-            audio.play()
-            this.show = true
-        }, 100);
-    },
     watch: {
         playerName() {
             this.keyboardEffect()
@@ -82,6 +85,16 @@ export default {
         }
     },
     methods: {
+        start() {
+            const audio = document.getElementById('tl-audio')
+            // audio.play()
+            // audio.volume = 0.2;
+            this.show = true
+            this.showNotice = false
+            audio.currentTime = 0.0
+            audio.volume = 0.5
+            audio.play()
+        },
         soundEffect() {
             const n = document.getElementById('dong')
             n.currentTime = 0.0
@@ -92,11 +105,12 @@ export default {
             const n = document.getElementById('tong')
             n.currentTime = 0.0
             n.play()
-            n.volume = 0.1
+            n.volume = 0.5
         },
         playGame() {
             if(this.playerName && this.email) {
                 const n = document.getElementById('play')
+                n.volume = 0.4
                 n.play()
 
                 setTimeout(() => {
