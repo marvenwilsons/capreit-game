@@ -348,9 +348,12 @@ export default {
                 choices: (() => {
                     // select 3 random items from selected gender
                     const answerIndex = celebs[gender].indexOf(answer)
-                    
+                    celebs[gender] = this.shuffle(celebs[gender])
+
                     let random = []
                     for(var i = 0; i < 3; i++) {
+                        celebs[gender] = this.shuffle(celebs[gender])
+
                         const myitem = celebs[gender][this.generateRandNumExcept(answerIndex,celebs[gender].length - 1)]
                         random.push(myitem)
                         // 
@@ -376,9 +379,9 @@ export default {
             
             if(randomInt == except) {
                 if(randomInt == 0) {
-                    return 1
+                    return this.generateRandNumExcept(getRandomInt(0,range),range)
                 } else {
-                    return randomInt - 1
+                    return this.generateRandNumExcept(getRandomInt(0,range),range)
                 }
             } else {
                 return randomInt
@@ -587,8 +590,10 @@ export default {
                 wrong.play()
                 if(this.wrongAnswers == undefined) {
                     this.wrongAnswers = 1
+                    this.gameStack = this.shuffle(this.celebs)
                 } else {
                     this.wrongAnswers = this.wrongAnswers + 1
+                    this.gameStack = this.shuffle(this.celebs)
                 }
             }
 
@@ -598,6 +603,7 @@ export default {
             } else {
                 this.gamePointer = this.gamePointer + 1
             }
+
             this.itemCountDown = 6
         },
         animatxtHandler(val) {
