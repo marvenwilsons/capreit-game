@@ -56,7 +56,9 @@
                     <v-scroll-x-transition>
                         <div v-if="mounted3" id="mainContent"  class="pad125 borderRad4 nodeShadow-w" >
                             <v-flex flexcol>
-                                <span class="cw ps sf" >Time Remaining: 00:{{countDown < 10 ? `0${countDown}` : countDown }}</span>
+                                <span class="cw ps sf" >
+                                    Time Remaining: {{countDownMin}}:{{countDown < 10 ? `0${countDown}` : countDown }}
+                                </span>
                                 <v-flex class=" spacearround " style="height: 6px;" >
                                     <div v-for="i in 5" :key="i"  :style="{background:getCountDownColor(i)}" class="flex1 margin050 pad025 nodeShadow-w"></div>
                                 </v-flex>
@@ -146,9 +148,9 @@
                             </v-flex>
                         </v-expand-transition>
                         <v-flex>
-                            <h6 @click="playagain" v-if="playAgain" class="gbtn cw pointer marginright125 ps" >
+                            <!-- <h6 @click="playagain" v-if="playAgain" class="gbtn cw pointer marginright125 ps" >
                                 Play Again
-                            </h6>
+                            </h6> -->
                             <h6>|</h6>
                             <h6 v-if="playAgain" class="cw pointer marginleft125 ps gbtn" >
                                 <div @click="submitScore" v-if="!isSubmitting" >Submit</div>
@@ -184,6 +186,7 @@ export default {
 
         // initializing game
         startGameCountDown: 5,
+        countDownMin: 4,
         countDown: 59, // 59
         
         // on game
@@ -472,8 +475,11 @@ export default {
                     if(this.startGameCountDown == 0) {
                         clearInterval(myInterval)
                         const triton = document.getElementById('triton-audio')
-                        triton.volume = '0.5'
-                        triton.play()
+                        setTimeout(() => {
+                            triton.volume = '0.5'
+                            triton.loop = true
+                            triton.play()
+                        }, 200);
     
                         buildUp.play()
                         buildUp.volume = 0.6
@@ -516,7 +522,7 @@ export default {
         /** 60 seconds */ startcountDown() {
             const myCountDown = setInterval(() => {
                 this.countDown = this.countDown - 1
-                if(this.countDown == 0) {
+                if(this.countDown == 0 && this.countDownMin == 0) {
                     // when game is done
                     clearInterval(myCountDown)
                     
@@ -549,6 +555,11 @@ export default {
                     }, 500);
 
                     this.loadScoreBoard()
+                }
+
+                if(this.countDown == 0) {
+                    this.countDownMin --
+                    this.countDown = 59
                 }
 
                 if(this.countDown <= 10) {
