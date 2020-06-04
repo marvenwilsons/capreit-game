@@ -99,13 +99,13 @@
                         <v-expand-transition>
                             <button v-if="show_normalPointsGained"  class="video-game-button ps " >
                                 <div class="pad050 padleft125 padright125 sf flex" >
-                                    normal points gained: <span><animatxt @done="animatxtHandler('threePointsGained')" 
+                                    normal points gained: <span><animatxt @done="animatxtHandler('correctAnswers')" 
                                         :val="normalPointsGained == undefined ? true : normalPointsGained" 
                                     /></span>x
                                 </div>     
                             </button>
                         </v-expand-transition>
-                        <v-expand-transition>
+                        <!-- <v-expand-transition>
                             <button v-if="show_threePointsGained"  class="video-game-button ps margintop125" >
                                 <div class="pad050 padleft125 padright125 sf flex" >
                                     3 points gained: <span><animatxt @done="animatxtHandler('correctAnswers')" 
@@ -113,7 +113,7 @@
                                     /></span>x
                                 </div>     
                             </button>
-                        </v-expand-transition>
+                        </v-expand-transition> -->
                         <v-expand-transition>
                             <button v-if="show_correctAnswers" class="video-game-button ps margintop125" >
                                 <div class="pad050 padleft125 padright125 sf flex" >
