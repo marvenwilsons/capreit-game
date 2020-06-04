@@ -44,7 +44,7 @@
                     <div class="flex" >
                         <v-scroll-x-transition>
                             <div v-if="mounted1" id="" class="pad125 borderRad4 nodeShadow-w sf" >
-                                <!-- <span class="cw ps" >Player: {{info.player}}</span> -->
+                                <span class="cw ps" >Player: {{info.player}}</span>
                             </div>
                         </v-scroll-x-transition>
                         <v-scroll-y-transition>
@@ -653,15 +653,15 @@ export default {
                 wrong.play()
                 if(this.wrongAnswers == undefined) {
                     this.wrongAnswers = 1
-                    this.gameStack = this.shuffle(this.celebs)
+                    // this.gameStack = this.shuffle(this.celebs)
                 } else {
                     this.wrongAnswers = this.wrongAnswers + 1
-                    this.gameStack = this.shuffle(this.celebs)
+                    // this.gameStack = this.shuffle(this.celebs)
                 }
             }
 
             if(this.gamePointer == this.gameStack.length - 1) {
-                this.gameStack = this.shuffle(this.celebs)
+                // this.gameStack = this.shuffle(this.celebs)
                 this.gamePointer = 0
             } else {
                 this.gamePointer = this.gamePointer + 1
