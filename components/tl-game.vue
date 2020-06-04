@@ -297,11 +297,12 @@ export default {
 
         },
         score() {
-            if(this.score >= 15) {
+            if(this.score == 15) {
                 this.gameFinishProtocol()
             }
         },
         gamePointer() {
+            console.log(this.gamePointer)
             if(this.gamePointer == 15) {
                 this.gameFinishProtocol()
             }
@@ -664,12 +665,13 @@ export default {
                 }
             }
 
-            if(this.gamePointer == this.gameStack.length - 1) {
-                // this.gameStack = this.shuffle(this.celebs)
-                this.gamePointer = 0
-            } else {
-                this.gamePointer = this.gamePointer + 1
-            }
+            // if(this.gamePointer == this.gameStack.length - 1) {
+            //     // this.gameStack = this.shuffle(this.celebs)
+            //     this.gamePointer = 0
+            // } else {
+            //     this.gamePointer = this.gamePointer + 1
+            // }
+            this.gamePointer = this.gamePointer + 1
 
             this.itemCountDown = 16
         },
