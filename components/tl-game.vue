@@ -531,6 +531,7 @@ export default {
             }, 500);
         },
         gameFinishProtocol(intervalFunction) {
+            this.totalQuestions = 15
             // when game is done
             clearInterval(intervalFunction)
             const win = document.getElementById('win')
@@ -613,7 +614,7 @@ export default {
             const unstoppable = document.getElementById('unstoppable')
             if(val == 1) {
                 
-                this.totalQuestions = this.totalQuestions + 1
+                // this.totalQuestions = this.totalQuestions + 1
                 if(this.itemCountDown == 15) {
                     this.score = this.score + 1
                     unlocklevel.volume = 0.3
