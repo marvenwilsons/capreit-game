@@ -44,7 +44,7 @@
                     <div class="flex" >
                         <v-scroll-x-transition>
                             <div v-if="mounted1" id="" class="pad125 borderRad4 nodeShadow-w sf" >
-                                <span class="cw ps" >Player: {{info.player}}</span>
+                                <!-- <span class="cw ps" >Player: {{info.player}}</span> -->
                             </div>
                         </v-scroll-x-transition>
                         <v-scroll-y-transition>
@@ -219,7 +219,7 @@ export default {
 
         playAgain: false,
         isSubmitting:false,
-        gameCredits: false
+        gameCredits: false,
     }),
     mounted() {
         // test 1
@@ -296,6 +296,11 @@ export default {
                 }, 600);
             }
 
+        },
+        score() {
+            if(this.score >= 15) {
+                this.gameFinishProtocol()
+            }
         }
     },
     methods: {
@@ -520,42 +525,40 @@ export default {
                 }, 500);
             }, 500);
         },
-        /** 60 seconds */ startcountDown() {
+        gameFinishProtocol(intervalFunction) {
+            // when game is done
+            clearInterval(intervalFunction)
+            const win = document.getElementById('win')
+            win.volume = 0.6
+            win.play()
+            const triton = document.getElementById('triton-audio')
+            triton.pause()
+            this.totalScore = this.score
+            // restore defaults
+            this.gameIsDone = true
+            this.countDown = 30
+            const infoOut = document.getElementById('cs6')
+            infoOut.volume = 1
+            setTimeout(() => {
+                infoOut.play()
+                this.mounted1 = false
+                setTimeout(() => {
+                    infoOut.play()
+                    this.mounted3 = false
+                    setTimeout(() => {
+                        infoOut.play()
+                        this.mounted2 = false
+                    }, 250);
+                }, 250);
+            }, 500);
+            this.loadScoreBoard()
+        },
+        /** 60 seconds */ 
+        startcountDown() {
             const myCountDown = setInterval(() => {
                 this.countDown = this.countDown - 1
                 if(this.countDown == 0 && this.countDownMin == 0) {
-                    // when game is done
-                    clearInterval(myCountDown)
-                    
-                    const win = document.getElementById('win')
-                    win.volume = 0.6
-                    win.play()
-
-                    const triton = document.getElementById('triton-audio')
-                    triton.pause()
-
-                    this.totalScore = this.score
-
-                    // restore defaults
-                    this.gameIsDone = true
-                    this.countDown = 30
-
-                    const infoOut = document.getElementById('cs6')
-                    infoOut.volume = 1
-                    setTimeout(() => {
-                        infoOut.play()
-                        this.mounted1 = false
-                        setTimeout(() => {
-                            infoOut.play()
-                            this.mounted3 = false
-                            setTimeout(() => {
-                                infoOut.play()
-                                this.mounted2 = false
-                            }, 250);
-                        }, 250);
-                    }, 500);
-
-                    this.loadScoreBoard()
+                    this.gameFinishProtocol(myCountDown)
                 }
 
                 if(this.countDown == 0) {
@@ -607,7 +610,7 @@ export default {
                 
                 this.totalQuestions = this.totalQuestions + 1
                 if(this.itemCountDown == 15) {
-                    this.score = this.score + 3
+                    this.score = this.score + 1
                     unlocklevel.volume = 0.3
                     unlocklevel.currentIndex = 0.0
                     unlocklevel.play()
