@@ -235,38 +235,37 @@ export default {
 
         // females
         this.celebs.push(questionNode('Adele','female'))
-        this.celebs.push(questionNode('Angelina Jolie','female'))
-        this.celebs.push(questionNode('Beyonce','female'))
-        this.celebs.push(questionNode('Celine Dion','female'))
+        // this.celebs.push(questionNode('Angelina Jolie','female'))
+        // this.celebs.push(questionNode('Beyonce','female'))
+        // this.celebs.push(questionNode('Celine Dion','female'))
         this.celebs.push(questionNode('Ellen','female'))
         this.celebs.push(questionNode('Janet Jackson','female'))
         this.celebs.push(questionNode('Jennifer Aniston','female'))
-        this.celebs.push(questionNode('Julia Roberts','female'))
+        // this.celebs.push(questionNode('Julia Roberts','female'))
         this.celebs.push(questionNode('Kim Kardashian','female'))
         this.celebs.push(questionNode('Lady Gaga','female'))
         this.celebs.push(questionNode('Madonna','female'))
-        this.celebs.push(questionNode('Miley Cyrus','female'))
+        // this.celebs.push(questionNode('Miley Cyrus','female'))
         this.celebs.push(questionNode('Oprah Winfrey','female'))
-        this.celebs.push(questionNode('Rihanna','female'))
-        this.celebs.push(questionNode('Selena Gomez','female'))
+        // this.celebs.push(questionNode('Rihanna','female'))
+        // this.celebs.push(questionNode('Selena Gomez','female'))
 
         // males
         this.celebs.push(questionNode('Barack Obama','male'))
-        this.celebs.push(questionNode('Brad Pitt','male'))
-        this.celebs.push(questionNode('Dr. Phil','male'))
+        // this.celebs.push(questionNode('Brad Pitt','male'))
+        // this.celebs.push(questionNode('Dr. Phil','male'))
         this.celebs.push(questionNode('Drake','male'))
-        this.celebs.push(questionNode('George Cloonie','male'))
+        // this.celebs.push(questionNode('George Cloonie','male'))
         this.celebs.push(questionNode('Jay-Z','male'))
         this.celebs.push(questionNode('Jim Carrey','male'))
-        this.celebs.push(questionNode('Justin Bieber','male'))
+        // this.celebs.push(questionNode('Justin Bieber','male'))
         this.celebs.push(questionNode('Usher','male'))
         this.celebs.push(questionNode('Will Smith','male'))
-        this.celebs.push(questionNode('Leonardo DiCarpio','male'))
-        this.celebs.push(questionNode('Michael Buble','male'))
+        // this.celebs.push(questionNode('Leonardo DiCarpio','male'))
+        // this.celebs.push(questionNode('Michael Buble','male'))
         this.celebs.push(questionNode('Michael Jackson','male'))
-        this.celebs.push(questionNode('Robbie Williams','male'))
-        this.celebs.push(questionNode('John Travolta','male'))
-        this.celebs.push(questionNode('John Travolta','male'))
+        // this.celebs.push(questionNode('Robbie Williams','male'))
+        // this.celebs.push(questionNode('John Travolta','male'))
 
     },
     watch: {
@@ -299,6 +298,11 @@ export default {
         },
         score() {
             if(this.score >= 15) {
+                this.gameFinishProtocol()
+            }
+        },
+        gamePointer() {
+            if(this.gamePointer == 15) {
                 this.gameFinishProtocol()
             }
         }
