@@ -142,8 +142,11 @@
                         <v-expand-transition>
                             <v-flex v-if="show_totalScore" style="max-width:560px;" flexcenter spacearround>
                                 <h1 class="ps cw marginright050" style="color:white;text-shadow: 2px 2px #f03304;font-size:25pt;"  >Total Score </h1>
-                                <h1 class="ps cw" style="color:white;text-shadow: 2px 2px #f03304; font-size:25pt;"  >
+                                <h1 v-if="totalScore != 1" class="ps cw" style="color:white;text-shadow: 2px 2px #f03304; font-size:25pt;"  >
                                     :<animatxt @done="animatxtHandler('playagain')" :val="totalScore == undefined ? true : totalScore" />
+                                </h1>
+                                <h1 style="color:white;text-shadow: 2px 2px #f03304; font-size:25pt;" v-if="totalScore == 1" class="ps cw marginright050"> 
+                                    :1
                                 </h1>
                             </v-flex>
                         </v-expand-transition>
@@ -223,7 +226,6 @@ export default {
     }),
     mounted() {
         // test 1
-        console.log(this.info)
         this.startGameOnLoadCountDown()
 
         const questionNode = (piclink_and_answer, gender) => {
@@ -297,12 +299,12 @@ export default {
 
         },
         score() {
+            console.log(this.score)
             if(this.score == 15) {
                 this.gameFinishProtocol()
             }
         },
         gamePointer() {
-            console.log(this.gamePointer)
             if(this.gamePointer == 15) {
                 this.gameFinishProtocol()
             }
@@ -532,6 +534,9 @@ export default {
         },
         gameFinishProtocol(intervalFunction) {
             this.totalQuestions = 15
+            // if(this.wrongAnswers != 0) {
+            //     this.score = 15 - this.wrongAnswers
+            // }
             // when game is done
             clearInterval(intervalFunction)
             const win = document.getElementById('win')

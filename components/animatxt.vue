@@ -33,6 +33,7 @@ export default {
             ing.play()
         }
 
+        console.log(this.val == 15)
         if(this.val != true) {
             const myInterval = setInterval(() => {
                 if(this.dat != parseInt(this.val)) {

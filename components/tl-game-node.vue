@@ -14,7 +14,7 @@
             </v-flex>
             <v-flex style="max-height:320px;" margintop125 flexcol flexcenter >
                 <v-flex v-for="(i,index) in item.choices" :key="index"   class="flex1 cw margintop050 sf" >
-                     <!-- :style="{background: item.answer == i ? 'green' : ''}" -->
+                    <!-- :style="{background: item.answer == i ? 'green' : ''}" -->
                     <button 
                         @mouseover="dong" @click="answer(i)" class="video-game-button ps marginright125" >
                         <div class="pad050 padleft125 padright125 sf" >{{i ? i : 'none of the above'}}</div>
