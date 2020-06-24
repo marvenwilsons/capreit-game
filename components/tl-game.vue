@@ -96,7 +96,7 @@
                 <v-flex flexcenter v-if="gameIsDone" relative >
                     <!-- nornal points: 5x, 3 points: 5x, correct answers: #, total questions: ##, total score: ##  -->
                     <div class="flex flexcol flexcenter relative" style="max-width: 650px" >
-                        <v-expand-transition>
+                        <!-- <v-expand-transition>
                             <button v-if="show_normalPointsGained"  class="video-game-button ps " >
                                 <div class="pad050 padleft125 padright125 sf flex" >
                                     normal points gained: <span><animatxt @done="animatxtHandler('correctAnswers')" 
@@ -104,7 +104,7 @@
                                     /></span>x
                                 </div>     
                             </button>
-                        </v-expand-transition>
+                        </v-expand-transition> -->
                         <!-- <v-expand-transition>
                             <button v-if="show_threePointsGained"  class="video-game-button ps margintop125" >
                                 <div class="pad050 padleft125 padright125 sf flex" >
@@ -591,6 +591,7 @@ export default {
         },
         submitScore() {
             // todo
+            console.log('submitting score!')
             this.isSubmitting  = true
             const url = undefined
             
@@ -728,7 +729,7 @@ export default {
             }, 500);
         },
         loadScoreBoard() {
-            this.show_normalPointsGained = true
+            this.show_correctAnswers = true
         },
         playagain() {
             this.$emit('playAgain')
