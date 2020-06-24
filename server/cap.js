@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const puppeteer = require('puppeteer');
+const moment = require('moment')
 
 // console.log('cap.js')
 
@@ -14,8 +15,10 @@ router.post('/sc',(req,res) => {
         await page.goto('https://forms.office.com/Pages/ResponsePage.aspx?id=7ktcUTdBnEKsodR3O_zQP5333xr1QM1PgIMjtpRPpdZURUZGRjNKWDJXSEVTNTFCUlZKUzE1TkdKVC4u')
     
         await page.type("input[aria-labelledby='question1-title question1-questiontype']", `${req.body.player}`)
-        await page.type("input[aria-labelledby='question2-title question2-questiontype']", `${req.body.office_location}`)
-        await page.type("input[aria-labelledby='question3-title question3-questiontype']", `${req.body.score}`)
+        await page.type("input[aria-labelledby='question3-title question3-questiontype']", `${req.body.office_location}`)
+        await page.type("input[aria-labelledby='question4-title question4-questiontype']", `${req.body.score}`)
+        await page.type("input[aria-labelledby='question5-title question5-questiontype']", `${moment().format("MMM Do YY")}`)
+        await page.type("input[aria-labelledby='question6-title question6-questiontype']", `${moment().format('LT')}`)
     
         await page.click('.office-form-bottom-button')
         await page.screenshot({path: 'example.png'})
