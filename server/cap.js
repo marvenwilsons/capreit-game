@@ -19,8 +19,8 @@ router.post('/sc',(req,res) => {
         await page.type("input[aria-labelledby='question1-title question1-questiontype']", `${req.body.player}`)
         await page.type("input[aria-labelledby='question3-title question3-questiontype']", `${req.body.office_location}`)
         await page.type("input[aria-labelledby='question4-title question4-questiontype']", `${req.body.score}`)
-        await page.type("input[aria-labelledby='question5-title question5-questiontype']", `${currentDate}`)
-        await page.type("input[aria-labelledby='question6-title question6-questiontype']", `${time}`)
+        await page.type("input[aria-labelledby='question5-title question5-questiontype']", `${req.body.playerdate}`)
+        await page.type("input[aria-labelledby='question6-title question6-questiontype']", `${req.body.playertime}`)
         
         await page.click('.office-form-bottom-button')
         await page.screenshot({path: 'example.png'})

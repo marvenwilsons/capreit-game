@@ -177,6 +177,7 @@
 import tlGameNode from './tl-game-node'
 import animatxt from './animatxt'
 import gameBtn from './game-btn'
+import moment from '@/moment.js'
 
 export default {
     props: ['info'],
@@ -592,7 +593,9 @@ export default {
             const ctx = {
                 player: this.info.player,
                 office_location: this.info.office_location,
-                score: this.score
+                score: this.score,
+                playertime: moment.getTime(),
+                playerdate: moment.getDate()
             }
             const options = {
                 method: 'POST',
