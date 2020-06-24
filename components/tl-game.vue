@@ -225,6 +225,7 @@ export default {
         playAgain: false,
         isSubmitting:false,
         gameCredits: false,
+        submitCount: 0,
     }),
     mounted() {
         
@@ -591,37 +592,40 @@ export default {
         },
         submitScore() {
             // todo
-            this.isSubmitting  = true
-            const url = undefined
-            
-
-            fetch('/cap/ct')
-            .then(res => res.json())
-            .then(res => {
-                const t = res.time
-                const ctx = {
-                    player: this.info.player,
-                    office_location: this.info.office_location,
-                    score: this.score,
-                    playertime: t,
-                    playerdate: moment.getDate()
-                }
-                const options = {
-                    method: 'POST',
-                    body: JSON.stringify(ctx),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }
+            if(this.submitCount == 0) {
+                this.submitCount = this.submitCount + 1
+                this.isSubmitting  = true
+                const url = undefined
                 
-                fetch('/cap/sc',options)
-                .then(res => res.json())
-                .then(res => console.log(res));
 
-                setTimeout(() => {
-                    this.$emit('gameCredits')
-                }, 5000);
-            })
+                fetch('/cap/ct')
+                .then(res => res.json())
+                .then(res => {
+                    const t = res.time
+                    const ctx = {
+                        player: this.info.player,
+                        office_location: this.info.office_location,
+                        score: this.score,
+                        playertime: t,
+                        playerdate: moment.getDate()
+                    }
+                    const options = {
+                        method: 'POST',
+                        body: JSON.stringify(ctx),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }
+
+                    fetch('/cap/sc',options)
+                    .then(res => res.json())
+                    .then(res => console.log(res));
+
+                    setTimeout(() => {
+                        this.$emit('gameCredits')
+                    }, 5000);
+                })
+            }
 
             
         },
