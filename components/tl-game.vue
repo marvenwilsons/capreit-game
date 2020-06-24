@@ -227,12 +227,7 @@ export default {
         gameCredits: false,
     }),
     mounted() {
-        fetch('/cap/ct')
-        .then(res => res.json())
-        .then(res => {
-            this.googleTime = res.time
-        })
-
+        
 
         // test 1
         this.startGameOnLoadCountDown()
@@ -598,28 +593,37 @@ export default {
             // todo
             this.isSubmitting  = true
             const url = undefined
-            const ctx = {
-                player: this.info.player,
-                office_location: this.info.office_location,
-                score: this.score,
-                playertime: this.googleTime,
-                playerdate: moment.getDate()
-            }
-            const options = {
-                method: 'POST',
-                body: JSON.stringify(ctx),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }
+            
 
-            fetch('/cap/sc',options)
+            fetch('/cap/ct')
+            .then(res => res.json())
+            .then(res => {
+                const t = res.time
+                const ctx = {
+                    player: this.info.player,
+                    office_location: this.info.office_location,
+                    score: this.score,
+                    playertime: t,
+                    playerdate: moment.getDate()
+                }
+                const options = {
+                    method: 'POST',
+                    body: JSON.stringify(ctx),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+                
+                fetch('/cap/sc',options)
                 .then(res => res.json())
                 .then(res => console.log(res));
 
-            setTimeout(() => {
-                this.$emit('gameCredits')
-            }, 5000);
+                setTimeout(() => {
+                    this.$emit('gameCredits')
+                }, 5000);
+            })
+
+            
         },
         //  onGaming
         nextItem(val) {
