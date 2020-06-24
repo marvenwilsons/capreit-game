@@ -1,11 +1,6 @@
 const express = require('express');
 const router = express.Router()
 const puppeteer = require('puppeteer');
-const moment = require('moment-timezone');
-const oldMoment = require('moment')
-
-const time = moment.tz(oldMoment(), "America/Phoenix").format('LT')
-const currentDate = oldMoment().format("MMM Do YY")
 
 router.post('/sc',(req,res) => {
     (async () => {
@@ -25,6 +20,25 @@ router.post('/sc',(req,res) => {
         await page.click('.office-form-bottom-button')
         await page.screenshot({path: 'example.png'})
     
+        await browswer.close()
+    })()
+})
+
+router.get('/ct',(req,res) => {
+    (async () => {
+        const browswer = await puppeteer.launch({
+            headless: true,
+            args: ['--no-sandbox'],
+        })
+        const page = await browswer.newPage()
+        await page.goto('https://www.google.com/search?sxsrf=ALeKk02ui53WRPUpPrzitgiZXvEkjX9Drg%3A1592963352903&ei=GLHyXsHKNo-sytMP7a6c4Ak&q=toronto+time&oq=torotn&gs_lcp=CgZwc3ktYWIQAxgAMgcIIxCxAhAnMgcIIxCxAhAnMgcIIxCxAhAnMgQIABBDMgQIABBDMgQIABBDMgQIABBDMgQIABAKMgQIABAKMgQIABBDOgQIIxAnOgUIABCRAjoKCAAQgwEQFBCHAjoFCAAQgwE6BQgAELEDOgcIABCDARBDOgcIABCxAxBDOgIIAFCCEFjJFGDkHWgAcAB4AYABowKIAY0GkgEFNC4xLjGYAQCgAQGqAQdnd3Mtd2l6&sclient=psy-ab')
+        const element = await page.$(".gsrt");
+        const time = await page.evaluate(element => element.textContent, element);
+        
+        res.status(200).json({
+            time
+        })
+
         await browswer.close()
     })()
 })

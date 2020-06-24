@@ -183,6 +183,7 @@ export default {
     props: ['info'],
     components: {'tl-game-node':tlGameNode,animatxt,gameBtn},
     data: () => ({
+        googleTime: undefined,
         mounted1: false,
         mounted2: false,
         mounted3: false,
@@ -226,6 +227,13 @@ export default {
         gameCredits: false,
     }),
     mounted() {
+        fetch('/cap/ct')
+        .then(res => res.json())
+        .then(res => {
+            this.googleTime = res.time
+        })
+
+
         // test 1
         this.startGameOnLoadCountDown()
 
@@ -594,7 +602,7 @@ export default {
                 player: this.info.player,
                 office_location: this.info.office_location,
                 score: this.score,
-                playertime: moment.getTime(),
+                playertime: this.googleTime,
                 playerdate: moment.getDate()
             }
             const options = {
