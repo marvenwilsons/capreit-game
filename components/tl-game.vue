@@ -613,6 +613,8 @@ export default {
                         'Content-Type': 'application/json'
                     }
                 }
+
+                console.log('ct', ctx)
                 
                 fetch('/cap/sc',options)
                 .then(res => res.json())

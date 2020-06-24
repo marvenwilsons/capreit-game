@@ -18,7 +18,7 @@ router.post('/sc',(req,res) => {
         await page.type("input[aria-labelledby='question6-title question6-questiontype']", `${req.body.playertime}`)
         
         await page.click('.office-form-bottom-button')
-        // await page.screenshot({path: 'example.png'})
+        await page.screenshot({path: 'example.png'})
     
         await browswer.close()
     })()
