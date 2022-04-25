@@ -22,7 +22,7 @@
     "puppeteer": "^3.2.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9",
-    "@nuxtjs/vuetify": "^1.0.0"
+    "@nuxtjs/vuetify": "^1.0.0",
+    "nodemon": "^2.0.15"
   }
 }

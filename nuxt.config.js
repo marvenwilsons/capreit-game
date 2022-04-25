@@ -2,7 +2,6 @@ const colors = require('vuetify/es5/util/colors').default
 const bodyParser = require('body-parser')
 
 module.exports = {
-  mode: 'universal',
   /*
   ** Headers of the page
   */
@@ -76,6 +75,8 @@ module.exports = {
     extend (config, ctx) {
     }
   },
+
+  telemetry: false,
 
   serverMiddleware: [
     bodyParser.json(),

@@ -159,8 +159,10 @@
                                 <div @click="submitScore" v-if="!isSubmitting" >Submit</div>
                                 <div v-if="isSubmitting" 
                                     style="font-size:40px; width: 100px;height:40px;text-align:center;" 
-                                    class="flex flexcenter loader">
-                                    <span >&#11118;</span>
+                                    class="flex flexcenter">
+                                    <h6 id="loading-i" >
+                                        loading ...
+                                    </h6>
                                 </div>
                             </h6>
                         </v-flex>
@@ -301,6 +303,16 @@ export default {
                 }, 600);
             }
 
+        },
+        isSubmitting() {
+            if(this.isSubmitting) {
+               setInterval(() => {
+                    document.getElementById('loading-i').style.textShadow =  '2px 2px #f03304'
+                    setTimeout(() => {
+                        document.getElementById('loading-i').style.textShadow =  'none'
+                    },500)
+               },1000)
+            }
         },
         score() {
             console.log(this.score)
