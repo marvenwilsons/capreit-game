@@ -24,3 +24,11 @@ you have a total of 2 minutes and 30 seconds to play the game.
 - The game should inform user score after 15 items
 - The user should have the ability to submit their score or try the game again
 - The game questions should be randomize so that each user that plays the game will have unique set of 15 questions.
+- The game should upload the score and user into an Excel file
+- The game should not store any user information on any kind of database.
+
+# Demo
+https://capreit-game.herokuapp.com/
+
+Excel file will be vaiable on in person demo.
+
