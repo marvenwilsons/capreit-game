@@ -3,24 +3,29 @@ const router = express.Router()
 const puppeteer = require('puppeteer');
 
 router.post('/sc',(req,res) => {
+    // input[aria-labelledby='QuestionId_r9492df494bb04f83b543fafd4bd6aad9 QuestionInfo_r9492df494bb04f83b543fafd4bd6aad9']
     (async () => {
-        const browswer = await puppeteer.launch({
-            headless: true,
-            args: ['--no-sandbox'],
-        })
-        const page = await browswer.newPage()
-        await page.goto('https://forms.office.com/Pages/ResponsePage.aspx?id=7ktcUTdBnEKsodR3O_zQP5333xr1QM1PgIMjtpRPpdZURUZGRjNKWDJXSEVTNTFCUlZKUzE1TkdKVC4u')
-    
-        await page.type("input[aria-labelledby='QuestionId_r9492df494bb04f83b543fafd4bd6aad9 QuestionInfo_r9492df494bb04f83b543fafd4bd6aad9']", `${req.body.player}`)
-        await page.type("input[aria-labelledby='QuestionId_r267f1caf191a47b3893f61bfdc6f933b QuestionInfo_r267f1caf191a47b3893f61bfdc6f933b']", `${req.body.office_location}`)
-        await page.type("input[aria-labelledby='QuestionId_r75e7f36439784dbc8afa425403f6e6e5 QuestionInfo_r75e7f36439784dbc8afa425403f6e6e5']", `${req.body.score}`)
-        await page.type("input[aria-labelledby='QuestionId_r220c57a02e4141e0ab3e0fe25e81a469 QuestionInfo_r220c57a02e4141e0ab3e0fe25e81a469']", `${req.body.playerdate}`)
-        await page.type("input[aria-labelledby='QuestionId_r3278c73ec29141dea091706d2299f18c QuestionInfo_r3278c73ec29141dea091706d2299f18c']", `${req.body.playertime}`)
+        try {
+            const browswer = await puppeteer.launch({
+                headless: true,
+                args: ['--no-sandbox'],
+            })
+            const page = await browswer.newPage()
+            await page.goto('https://forms.office.com/Pages/ResponsePage.aspx?id=7ktcUTdBnEKsodR3O_zQP5333xr1QM1PgIMjtpRPpdZURUZGRjNKWDJXSEVTNTFCUlZKUzE1TkdKVC4u')
         
-        await page.click('.office-form-bottom-button')
-        await page.screenshot({path: 'example.png'})
-    
-        await browswer.close()
+            await page.type("input[aria-labelledby='QuestionId_r9492df494bb04f83b543fafd4bd6aad9 QuestionInfo_r9492df494bb04f83b543fafd4bd6aad9']", `${req.body.player}`)
+            await page.type("input[aria-labelledby='QuestionId_r267f1caf191a47b3893f61bfdc6f933b QuestionInfo_r267f1caf191a47b3893f61bfdc6f933b']", `${req.body.office_location}`)
+            await page.type("input[aria-labelledby='QuestionId_r75e7f36439784dbc8afa425403f6e6e5 QuestionInfo_r75e7f36439784dbc8afa425403f6e6e5']", `${req.body.score}`)
+            await page.type("input[aria-labelledby='QuestionId_r220c57a02e4141e0ab3e0fe25e81a469 QuestionInfo_r220c57a02e4141e0ab3e0fe25e81a469']", `${req.body.playerdate}`)
+            await page.type("input[aria-labelledby='QuestionId_r3278c73ec29141dea091706d2299f18c QuestionInfo_r3278c73ec29141dea091706d2299f18c']", `${req.body.playertime}`)
+            
+            await page.click('.office-form-bottom-button')
+            await page.screenshot({path: 'example.png'})
+        
+            await browswer.close()
+        } catch(err) {
+            console.log(err)
+        }
     })()
 })
 
