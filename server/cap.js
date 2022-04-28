@@ -12,8 +12,9 @@ router.post('/sc',(req,res) => {
             })
             const page = await browswer.newPage()
             await page.goto('https://forms.office.com/Pages/ResponsePage.aspx?id=7ktcUTdBnEKsodR3O_zQP5333xr1QM1PgIMjtpRPpdZURUZGRjNKWDJXSEVTNTFCUlZKUzE1TkdKVC4u')
-        
+            await page.waitForSelector("input[aria-labelledby='QuestionId_r9492df494bb04f83b543fafd4bd6aad9 QuestionInfo_r9492df494bb04f83b543fafd4bd6aad9']")
             await page.type("input[aria-labelledby='QuestionId_r9492df494bb04f83b543fafd4bd6aad9 QuestionInfo_r9492df494bb04f83b543fafd4bd6aad9']", `${req.body.player}`)
+            
             await page.type("input[aria-labelledby='QuestionId_r267f1caf191a47b3893f61bfdc6f933b QuestionInfo_r267f1caf191a47b3893f61bfdc6f933b']", `${req.body.office_location}`)
             await page.type("input[aria-labelledby='QuestionId_r75e7f36439784dbc8afa425403f6e6e5 QuestionInfo_r75e7f36439784dbc8afa425403f6e6e5']", `${req.body.score}`)
             await page.type("input[aria-labelledby='QuestionId_r220c57a02e4141e0ab3e0fe25e81a469 QuestionInfo_r220c57a02e4141e0ab3e0fe25e81a469']", `${req.body.playerdate}`)
